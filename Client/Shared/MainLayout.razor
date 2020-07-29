@@ -1,0 +1,115 @@
+﻿@inherits LayoutComponentBase
+@using System.ComponentModel
+@inject ViewBagServices viewBagServices
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <img src="img/logo.png" alt="">
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <p class="nav navbar-nav menu_nav ml-auto">
+                        <font class="nav-item active">Welcome @viewBagServices.UserName</font>
+                    </p>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+</header>
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="main">
+    <section class="home_banner_area">
+        <div class="banner_inner d-flex align-items-center">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+            <div class="container">
+                <div class="banner_content text-center">
+                    <h3>We Ensure better education <br />for a better world</h3>
+                    <p>In the history of modern astronomy, there is probably no one greater leap forward than the building and launch of the space telescope known as the Hubble.</p>
+                    @*<a class="main_btn" href="#">Get Started</a>*@
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="finance_area">
+        <div class="container">
+            <div class="finance_inner row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="finance_item">
+                        <div class="media">
+                            <div class="d-flex">
+                                <i class="lnr lnr-rocket"></i>
+                            </div>
+                            <div class="media-body">
+                                <h5> Full stack  <br />Framework</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="finance_item">
+                        <div class="media">
+                            <div class="d-flex">
+                                <i class="lnr lnr-rocket"></i>
+                            </div>
+                            <div class="media-body">
+                                <h5> Microservices</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="finance_item">
+                        <div class="media">
+                            <div class="d-flex">
+                                <i class="lnr lnr-rocket"></i>
+                            </div>
+                            <div class="media-body">
+                                <h5> Distributed Application</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="finance_item">
+                        <div class="media">
+                            <div class="d-flex">
+                                <i class="lnr lnr-rocket"></i>
+                            </div>
+                            <div class="media-body">
+                                <h5> Big Data</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="courses_area p_120">
+        <div class="container">
+            <div class="main_title">
+                <h2>Popular Free Courses</h2>
+                <p>This portal provides the link to common technologies, framework, design principles and data related concepts used in MyComp. Click the links below to read about them.</p>
+            </div>
+
+            @Body
+        </div>
+    </section>
+</div>
+@code{
+    protected override Task OnInitializedAsync()
+    {
+        viewBagServices.PropertyChanged += OnPropertyChanged;
+        return base.OnInitializedAsync();
+
+    }
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e )
+    {
+        StateHasChanged();
+    }
+}
+      

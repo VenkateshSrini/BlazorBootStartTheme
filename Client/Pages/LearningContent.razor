@@ -1,0 +1,76 @@
+﻿@page "/LearningContent"
+@using System.Text.Json;
+@using MyComp.KPortal.Shared;
+@inject HttpClient httpClient
+@inject NavigationManager UriHelper
+@inject ViewBagServices viewBagServices
+@if (Learnings == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+<div class="grid_inner">
+    @foreach (var learning in Learnings)
+    {
+        <div class="@learning.StyleName">
+            <div class="courses_item">
+                <img src="@learning.ImageUrl" alt="">
+                <div class="hover_text">
+                    <a href="@learning.LearningUrl"><h4>@learning.TopicSynopsis</h4></a>
+                </div>
+            </div>
+        </div>
+    }
+   
+</div>
+}
+
+@code {
+    List<Learning> Learnings;
+    int rowCount = 0;
+    int elementInRow;
+    int imageSufix;
+    int itemCount;
+    protected override async Task OnInitializedAsync()
+    {
+        var baseUri = UriHelper.BaseUri.ToString();
+        var response = await httpClient.GetAsync($"{baseUri}api/Learning");
+        if (response.IsSuccessStatusCode)
+        {
+            var learningResponse = await response.Content.ReadFromJsonAsync<LearningResponse>();
+            Learnings = learningResponse.Learnings;
+            viewBagServices.UserName = learningResponse.UserName;
+        }
+        for (int itemCount = 0; itemCount < Learnings.Count; itemCount++)
+        {
+            imageSufix = itemCount + 1;
+            if (imageSufix > 4)
+                imageSufix = 0;
+            Learnings[itemCount].ImageUrl = $"img/courses/course-{imageSufix}.jpg";
+            if (itemCount % 2 == 0)
+                rowCount++;
+
+            if (rowCount % 2 != 0)
+            {
+                if (itemCount % 2 != 0)
+                    Learnings[itemCount].StyleName = "grid_item wd44";
+                else
+                    Learnings[itemCount].StyleName = "grid_item wd55";
+            }
+            else
+            {
+                if (itemCount % 2 != 0)
+                    Learnings[itemCount].StyleName = "grid_item wd55";
+                else
+                    Learnings[itemCount].StyleName = "grid_item wd44";
+            }
+
+
+
+
+
+        }
+    }
+}

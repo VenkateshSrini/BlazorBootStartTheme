@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Client/bin/Debug/netstandard2.1
+/Client/obj
+/Server/bin/Debug/netcoreapp3.1
+/Server/obj
+/Shared/bin/Debug/netstandard2.1
+/Shared/obj/Debug/netstandard2.1
+/Shared/obj
+/.vs/MyComp.KPortal/v16
